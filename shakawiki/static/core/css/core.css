@@ -1,0 +1,15 @@
+
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+.toplevel > .menu {
+    margin: 0;
+    padding: 0;
+}
+
+.toplevel > .content {
+    margin: 0;
+    padding: 0;
+}
