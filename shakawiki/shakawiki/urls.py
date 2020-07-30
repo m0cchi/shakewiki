@@ -19,5 +19,8 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('article/<int:article_id>/',
+         wiki_views.ArticleView.as_view(),
+         name="article"),
     path('', wiki_views.TopView.as_view(), name="top"),
 ]

@@ -34,22 +34,7 @@
     <div class="container-fluid">
       <div class="row toplevel">
         <div class="col menu">
-          <ul>
-            <li>/
-              <ul>
-                <li>web-application-security
-                  <ul>
-                    <li>Chaptor 1
-                      <ul>
-                        <li>Section 1</li>
-                        <li>Section 2</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          {% block menu %}{% endblock %}
         </div>
         <div class="col-8 content">
           {% block content %}{% endblock %}
