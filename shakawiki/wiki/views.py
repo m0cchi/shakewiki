@@ -19,6 +19,9 @@ class BaseWikiTemplateView(BaseTemplateView):
   @classmethod
   def ulrized_tree(cls):
     tree = BaseWikiTemplateView.make_tree()
+    if 'path__/' not in tree:
+      return '<ul><li>/</li></ul>'
+
     html = BaseWikiTemplateView.make_ul('/', tree['path__/'])
     return html
 
