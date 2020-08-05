@@ -8,17 +8,23 @@ class BaseWikiTemplateView(BaseTemplateView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
 
-    context['menu'] = BaseWikiTemplateView.ulrized_tree()
+    context['menu'] = BaseWikiTemplateView.ulrized_tree(self.request.user)
 
     return context
 
   def render_to_response(self, context, response_kwargs={}):
     context = self.get_context_data(**context)
+
     return super().render_to_response(context, **response_kwargs)
 
   @classmethod
-  def ulrized_tree(cls):
-    tree = BaseWikiTemplateView.make_tree()
+  def ulrized_tree(cls, user):
+    if user.is_authenticated:
+      queryset = Article.public_objects.private_articles(user)
+    else:
+      queryset = Article.public_objects.all()
+
+    tree = BaseWikiTemplateView.make_tree(queryset)
     if 'path__/' not in tree:
       return '<ul><li>/</li></ul>'
 
@@ -50,8 +56,8 @@ class BaseWikiTemplateView(BaseTemplateView):
     return html
 
   @classmethod
-  def make_tree(cls):
-    pages = Article.objects.all().values('id', 'path')
+  def make_tree(cls, queryset):
+    pages = queryset.values('id', 'path')
     tree = {}
     for page in pages:
       page['path'] = [p + '/' for p in page['path'].split('/')]
@@ -95,7 +101,7 @@ class ArticleView(BaseWikiTemplateView):
   def get(self, request, article_id, **kwargs):
     context = {}
     try:
-      article = Article.objects.get(id=article_id)
+      article = Article.public_objects.get(request.user, id=article_id)
       context['path'] = article.path
       context['body'] = article.body
     except Article.DoesNotExist:
