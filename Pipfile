@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 markdown = "*"
 py-gfm = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
