@@ -12,8 +12,10 @@ class PublicArticleManager(models.Manager):
     return super().get_queryset().filter(private=False)
 
   def private_articles(self, user):
-    return super().get_queryset().filter(
-      models.Q(private=False) | models.Q(private=True, by=user))
+    query = models.Q(private=False)
+    if user.is_authenticated:
+      query = query | models.Q(private=True, by=user)
+    return super().get_queryset().filter(query)
 
   def get(self, user, **kwargs):
     return self.private_articles(user).get(**kwargs)
