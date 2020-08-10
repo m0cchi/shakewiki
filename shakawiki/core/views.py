@@ -8,6 +8,7 @@ class BaseTemplateView(TemplateView):
     context = super().get_context_data(**kwargs)
 
     context['cache_key'] = settings.VERSION_ID
+    context['title'] = settings.TITLE
 
     return context
 

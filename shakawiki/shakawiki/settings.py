@@ -27,6 +27,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TITLE = os.environ.get('SHAKAWIKI_TITLE', 'shakawiki')
+
 VERSION = '0.1.0i'
 
 VERSION_ID = hashlib.sha224(VERSION.encode()).hexdigest()
