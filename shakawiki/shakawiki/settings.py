@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import hashlib
 import os
 from dotenv import load_dotenv
+from shakawiki import utils
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,8 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = utils.get_env('SHAKAWIKI_DEBUG' ,'t' ,encoder=utils.str2bool)
+
 
 TITLE = os.environ.get('SHAKAWIKI_TITLE', 'shakawiki')
 
@@ -34,6 +36,9 @@ VERSION = '0.1.0i'
 VERSION_ID = hashlib.sha224(VERSION.encode()).hexdigest()
 
 ALLOWED_HOSTS = []
+SHAKAWIKI_DOMAIN = os.environ.get('SHAKAWIKI_DOMAIN')
+if SHAKAWIKI_DOMAIN:
+  ALLOWED_HOSTS.append(SHAKAWIKI_DOMAIN)
 
 # Application definition
 
