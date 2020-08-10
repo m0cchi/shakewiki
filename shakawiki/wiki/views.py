@@ -91,6 +91,7 @@ class TopView(BaseWikiTemplateView):
 
   def get(self, request, **kwargs):
     context = {}
+    context['articles'] = Article.public_objects.all().order_by('-updated').values('id', 'path', 'updated')[:30]
     return self.render_to_response(context)
 
 
