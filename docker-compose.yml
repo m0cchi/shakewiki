@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: shakawiki.dockerfile
+    environment:
+      SHAKAWIKI_TITLE: ${SHAKAWIKI_TITLE-shakawiki}
+    ports:
+      - 8000:8000
+    volumes:
+      - ./shakawiki/db.sqlite3:/usr/src/shakawiki/shakawiki/db.sqlite3
+      - ./shakawiki/.env:/usr/src/shakawiki/shakawiki/.env
