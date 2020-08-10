@@ -3,6 +3,18 @@
 {% load static %}
 {% block content %}
 <div>
-  <h1>Welcome to shakewiki</h1>
+  <h1>Welcome to {{title}}</h1>
+  <div class="card" style="width: 50%;">
+    <div class="card-header">
+      New
+    </div>
+    <ul class="list-group list-group-flush">
+      {% for a in articles %}
+      <a href="/article/{{a.id}}/">
+        <li class="list-group-item">{{ a.path }} - {{ a.updated }}</li>
+      </a>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}
