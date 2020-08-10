@@ -22,7 +22,7 @@ class PublicArticleManager(models.Manager):
 
 
 class Article(models.Model):
-  path = models.CharField(max_length=512)
+  path = models.CharField(max_length=512, unique=True)
   body = models.TextField(blank=True)
   markdown_body = models.TextField(blank=True)
   private = models.BooleanField(default=False)
