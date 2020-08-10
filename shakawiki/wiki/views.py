@@ -102,6 +102,7 @@ class ArticleView(BaseWikiTemplateView):
     context = {}
     try:
       article = Article.public_objects.get(request.user, id=article_id)
+      context['subtitle'] = article.path
       context['path'] = article.path
       context['body'] = article.body
     except Article.DoesNotExist:
