@@ -1,0 +1,7 @@
+.python-version
+shakawiki/db.sqlite3
+*pyc
+*~
+yapf*.py
+shakawiki/.env
+
