@@ -27,6 +27,8 @@ class Article(models.Model):
   markdown_body = models.TextField(blank=True)
   private = models.BooleanField(default=False)
   by = models.ForeignKey(User, related_name='articles', on_delete=models.SET_NULL, null=True)
+  created = models.DateTimeField(auto_now_add=True)
+  updated = models.DateTimeField(auto_now=True)
 
   objects = AdminArticleManager()
   public_objects = PublicArticleManager()
